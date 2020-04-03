@@ -14,11 +14,17 @@ class MyNode(DTROS):
         # initialize the DTROS parent class
         super(MyNode, self).__init__(node_name=node_name)
 
+#write data from bagfile to txt file
+#bagfile needs to be in correct folder 
+#to run prgm correctly, use volume mounting
     def run(self):
 
+        #choose name of txt file (choose folder according to volume mounting)
         file = open("/home/movement.txt","w")
 
+        #name bag to analyze (attention volume mounting)
         bag = rosbag.Bag('/home/bag2.bag')
+        #choose topic
         for topic, msg, t in bag.read_messages("/marschla/lane_filter_node/lane_pose"):
             rospy.loginfo(msg)
             file.write(str(msg))
@@ -26,6 +32,7 @@ class MyNode(DTROS):
         bag.close()
         file.close()
 
+#currently unused
 def extract():
     dist = []
     phi = []
@@ -53,7 +60,7 @@ if __name__ == '__main__':
     # create the node
     node = MyNode(node_name='my_node')
 
-    print("Commence operation Order 66!")
+    print("Start\n")
 
     # run node
     node.run()
@@ -62,7 +69,7 @@ if __name__ == '__main__':
 
     #extract()
 
-    print("Order 66 executed, all Jedis are dead!")
+    print("\nEnd")
 
     
 
