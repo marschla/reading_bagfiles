@@ -41,7 +41,7 @@ time_vel = []
 
 
 #txt file to analyze
-with open('/home/marco/bagfiles/lp_wd_2.txt', 'r') as reader:
+with open('/home/marco/bagfiles/lp1.txt', 'r') as reader:
     line = reader.readline()
     while line != '':
         
@@ -66,6 +66,17 @@ with open('/home/marco/bagfiles/lp_wd_2.txt', 'r') as reader:
                 lane.append(0)
                 #print(line[9])
 
+        if line[4]+line[5]+line[6] == "sec":
+            nline = reader.readline()
+            t = float(line[10:])+float(nline[11:])/1000000000.0
+            time_pose.append(t)
+    
+        #next line
+        line = reader.readline()
+
+with open('/home/marco/bagfiles/wd1.txt','r') as reader:
+    line = reader.readline()
+    while line != "":
         #extracting velocities (->actuator inputs)
         if line[0]+line[1]+line[2]+line[3]+line[4] == "vel_l":
             nline = reader.readline()
@@ -79,10 +90,11 @@ with open('/home/marco/bagfiles/lp_wd_2.txt', 'r') as reader:
                 j+=1
             #print(nline[11:11+j])
             v_r.append(float(nline[11:11+j]))
-            
-            
-        
-        #next line
+
+        if line[4]+line[5]+line[6] == "sec":
+            nline = reader.readline()
+            t = float(line[10:])+float(nline[11:])/1000000000.0
+            time_vel.append(t)
         line = reader.readline()
 
 #the last element in the v_r/v_l element are the stop commands, which are not really interesting -> remove
@@ -102,7 +114,7 @@ for i in range(0,len(v_l)):
     vdif[i]=v_r[i]-v_l[i]
 
 
-
+'''
 #plots
 xaxis1 = np.arange(0,len(dist))
 plt.scatter(xaxis1,dist,color='red',label="distance to lane center",s=5.0)
@@ -119,6 +131,37 @@ plt.scatter(xaxis2,v_r,color='green',label='vel_right',s=5.0)
 plt.legend()
 plt.title("wheels_cmd data")
 plt.show()
+'''
 
 
+#writing data to txt file for further use 
+'''
+file = open("/home/marco/estimatedelay/data1_dist.txt","w")
+file.write(str(dist))
+file.close()
 
+file = open("/home/marco/estimatedelay/data1_phi.txt","w")
+file.write(str(phi))
+file.close()
+
+file = open("/home/marco/estimatedelay/data1_vdif.txt","w")
+file.write(str(vdif))
+file.close()
+
+file = open("/home/marco/estimatedelay/data1_timepose.txt","w")
+file.write(str(time_pose))
+file.close()
+
+file = open("/home/marco/estimatedelay/data1_timevel.txt","w")
+file.write(str(time_vel))
+file.close()
+'''
+
+#using numpy to store an array of floats seems to be more convenient
+np.savetxt("/home/marco/estimatedelay/data1_dist.txt",dist)
+np.savetxt("/home/marco/estimatedelay/data1_phi.txt",phi)
+np.savetxt("/home/marco/estimatedelay/data1_vdif.txt",vdif)
+np.savetxt("/home/marco/estimatedelay/data1_timepose.txt",time_pose)
+np.savetxt("/home/marco/estimatedelay/data1_timevel.txt",time_vel)
+
+print("\nData stored.")

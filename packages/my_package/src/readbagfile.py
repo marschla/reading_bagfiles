@@ -20,37 +20,32 @@ class MyNode(DTROS):
     def run(self):
 
         #choose name of txt file (choose folder according to volume mounting)
-        file = open("/home/lp_wd_2.txt","w")
+        file = open("/home/lp1.txt","w")
 
         #name bag to analyze (attention volume mounting)
         bag = rosbag.Bag('/home/lf2.bag')
         #choose topic
-        for topic, msg, t in bag.read_messages(topics=["/marschla/lane_filter_node/lane_pose","/marschla/wheels_driver_node/wheels_cmd"]):
+        for topic, msg, t in bag.read_messages("/marschla/lane_filter_node/lane_pose"):
             #rospy.loginfo(msg)
             file.write(str(msg))
 
         bag.close()
         file.close()
 
-#currently unused
-def extract():
-    dist = []
-    phi = []
 
-    with open('/home/lp_wd_2.txt', 'r') as reader:
-        line = reader.readline()
-        while line != '':
-        
-            #only using specific lines 
-            if line[0]+line[1]=="d:":
-                dist.append(float(line[2:]))
-                #print(float(line[2:]), end='')
-                #print("\n")
-            if line[0]+line[1]+line[2]+line[3] == "phi:":
-                phi.append(float(line[4:]))
+        #choose name of txt file (choose folder according to volume mounting)
+        file = open("/home/wd1.txt","w")
 
-            #next line
-            line = reader.readline()
+        #name bag to analyze (attention volume mounting)
+        bag = rosbag.Bag('/home/lf2.bag')
+        #choose topic
+        for topic, msg, t in bag.read_messages("/marschla/wheels_driver_node/wheels_cmd"):
+            #rospy.loginfo(msg)
+            file.write(str(msg))
+
+        bag.close()
+        file.close()
+
 
 
 
@@ -65,8 +60,6 @@ if __name__ == '__main__':
     # run node
     node.run()
 
-    #do not uncomment, does not work properly/no real functionality yet
-    #extract()
 
     print("\nEnd")
 
