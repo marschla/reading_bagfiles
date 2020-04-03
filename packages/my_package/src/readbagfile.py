@@ -65,8 +65,7 @@ if __name__ == '__main__':
     # run node
     node.run()
 
-    #print("We secured the Jedi Archives!")
-
+    #do not uncomment, does not work properly/no real functionality yet
     #extract()
 
     print("\nEnd")
