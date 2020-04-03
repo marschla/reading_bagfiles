@@ -1,5 +1,5 @@
 # parameters
-ARG REPO_NAME="template-ros"
+ARG REPO_NAME="reading_bagfiles"
 
 # ==================================================>
 # ==> Do not change this code

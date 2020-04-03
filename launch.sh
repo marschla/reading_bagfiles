@@ -4,5 +4,6 @@ set -e
 
 # YOUR CODE BELOW THIS LINE
 # ----------------------------------------------------------------------------
-roslaunch my_package node.launch
-#rosrun my_package sub.py
+roscore &
+sleep 5
+rosrun my_package readbagfile.py
