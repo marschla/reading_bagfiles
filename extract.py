@@ -2,10 +2,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#arrays where data is stored for plot
 dist = []
 phi = []
 lane = []
 
+#txt file to analyze
 with open('/home/marco/bagfiles/movement.txt', 'r') as reader:
     line = reader.readline()
     while line != '':
