@@ -20,13 +20,13 @@ class MyNode(DTROS):
     def run(self):
 
         #choose name of txt file (choose folder according to volume mounting)
-        file = open("/home/lf2.txt","w")
+        file = open("/home/lp_wd_2.txt","w")
 
         #name bag to analyze (attention volume mounting)
         bag = rosbag.Bag('/home/lf2.bag')
         #choose topic
-        for topic, msg, t in bag.read_messages("/marschla/lane_filter_node/lane_pose"):
-            rospy.loginfo(msg)
+        for topic, msg, t in bag.read_messages(topics=["/marschla/lane_filter_node/lane_pose","/marschla/wheels_driver_node/wheels_cmd"]):
+            #rospy.loginfo(msg)
             file.write(str(msg))
 
         bag.close()
@@ -37,7 +37,7 @@ def extract():
     dist = []
     phi = []
 
-    with open('/home/lf2.txt', 'r') as reader:
+    with open('/home/lp_wd_2.txt', 'r') as reader:
         line = reader.readline()
         while line != '':
         
