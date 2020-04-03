@@ -20,10 +20,10 @@ class MyNode(DTROS):
     def run(self):
 
         #choose name of txt file (choose folder according to volume mounting)
-        file = open("/home/movement.txt","w")
+        file = open("/home/lf2.txt","w")
 
         #name bag to analyze (attention volume mounting)
-        bag = rosbag.Bag('/home/bag2.bag')
+        bag = rosbag.Bag('/home/lf2.bag')
         #choose topic
         for topic, msg, t in bag.read_messages("/marschla/lane_filter_node/lane_pose"):
             rospy.loginfo(msg)
@@ -37,7 +37,7 @@ def extract():
     dist = []
     phi = []
 
-    with open('/home/test.txt', 'r') as reader:
+    with open('/home/lf2.txt', 'r') as reader:
         line = reader.readline()
         while line != '':
         
