@@ -4,3 +4,5 @@ Use extract.py to plot data
 (note extract.py is a normal python file, which is not run on a docker container)
 
 Code needs adjustments according to relevant topic,data etc.
+
+I know the code is a mess

@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#basic filter (if this even counts as filter)
 def filter(arr):
     arrf = np.arange(0,len(arr),dtype = np.float64)
     for i in range(0,len(arr)):
@@ -29,14 +30,15 @@ def reltime(arr):
     return arrf
 
 
-
 #arrays where data is stored for plot
 dist = []
 phi = []
 lane = []
-time = []
+time_pose = []
 v_l = []
 v_r = []
+time_vel = []
+
 
 #txt file to analyze
 with open('/home/marco/bagfiles/lp_wd_2.txt', 'r') as reader:
@@ -94,27 +96,28 @@ distf = filter(dist)
   
 print("\nData extracted")
 
-#plots
-xaxis1 = np.arange(0,len(dist))
-plt.scatter(xaxis1,dist,color='red',label="not filtered",s=5.0)
-#plt.scatter(time,distf,color='green',label="filtered",s=5.0)
-plt.legend()
-#plt.show()
-#plt.scatter(xaxis1,phi)
-#plt.show()
-#plt.scatter(xaxis1,lane)
-plt.show()
-
-
 #computing velocity difference, since this our main control input
 vdif = np.arange(0,len(v_l),dtype = float)
 for i in range(0,len(v_l)):
     vdif[i]=v_r[i]-v_l[i]
 
+
+
+#plots
+xaxis1 = np.arange(0,len(dist))
+plt.scatter(xaxis1,dist,color='red',label="distance to lane center",s=5.0)
+plt.title("lane_pose data")
+plt.legend()
+#plt.show()
+#plt.scatter(xaxis1,phi)
+#plt.show()
+plt.show()
+
 xaxis2 = np.arange(0,len(v_l))
 plt.scatter(xaxis2,v_l,color='red',label='vel_left',s=5.0)
 plt.scatter(xaxis2,v_r,color='green',label='vel_right',s=5.0)
 plt.legend()
+plt.title("wheels_cmd data")
 plt.show()
 
 
