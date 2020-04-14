@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#name of txt file
 name = "PI_sat_4"
 
 

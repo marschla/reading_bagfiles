@@ -19,6 +19,7 @@ class MyNode(DTROS):
 #to run prgm correctly, use volume mounting
     def run(self):
 
+        #name of bagfile/txtfile
         name = "PI_sat_4"
 
         #choose name of txt file (choose folder according to volume mounting)
