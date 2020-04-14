@@ -2,6 +2,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+name = "PI_sat_4"
+
+
 #basic filter (if this even counts as filter)
 def filter(arr):
     arrf = np.arange(0,len(arr),dtype = np.float64)
@@ -41,7 +44,7 @@ time_vel = []
 
 
 #txt file to analyze
-with open('/home/marco/bagfiles/lp1.txt', 'r') as reader:
+with open('/home/marco/bagfiles/'+name+'_lp.txt', 'r') as reader:
     line = reader.readline()
     while line != '':
         
@@ -74,7 +77,7 @@ with open('/home/marco/bagfiles/lp1.txt', 'r') as reader:
         #next line
         line = reader.readline()
 
-with open('/home/marco/bagfiles/wd1.txt','r') as reader:
+with open('/home/marco/bagfiles/'+name+'_wd.txt','r') as reader:
     line = reader.readline()
     while line != "":
         #extracting velocities (->actuator inputs)
@@ -100,9 +103,10 @@ with open('/home/marco/bagfiles/wd1.txt','r') as reader:
 #the last element in the v_r/v_l element are the stop commands, which are not really interesting -> remove
 v_r.pop(len(v_r)-1)
 v_l.pop(len(v_l)-1)
+time_vel.pop(len(time_vel)-1)
 
 #comment if data should not be filtered
-distf = filter(dist)
+#distf = filter(dist)
 
 #time = reltime(time)
   
@@ -158,10 +162,10 @@ file.close()
 '''
 
 #using numpy to store an array of floats seems to be more convenient
-np.savetxt("/home/marco/estimatedelay/data1_dist.txt",dist)
-np.savetxt("/home/marco/estimatedelay/data1_phi.txt",phi)
-np.savetxt("/home/marco/estimatedelay/data1_vdif.txt",vdif)
-np.savetxt("/home/marco/estimatedelay/data1_timepose.txt",time_pose)
-np.savetxt("/home/marco/estimatedelay/data1_timevel.txt",time_vel)
+np.savetxt("/home/marco/data_eval/"+name+"_dist.txt",dist)
+np.savetxt("/home/marco/data_eval/"+name+"_phi.txt",phi)
+np.savetxt("/home/marco/data_eval/"+name+"_vdif.txt",vdif)
+np.savetxt("/home/marco/data_eval/"+name+"_timepose.txt",time_pose)
+np.savetxt("/home/marco/data_eval/"+name+"_timevel.txt",time_vel)
 
 print("\nData stored.")

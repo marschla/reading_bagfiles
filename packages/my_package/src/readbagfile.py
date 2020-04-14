@@ -19,13 +19,15 @@ class MyNode(DTROS):
 #to run prgm correctly, use volume mounting
     def run(self):
 
+        name = "PI_sat_4"
+
         #choose name of txt file (choose folder according to volume mounting)
-        file = open("/home/lp1.txt","w")
+        file = open("/home/"+name+"_lp.txt","w")
 
         #name bag to analyze (attention volume mounting)
-        bag = rosbag.Bag('/home/lf2.bag')
+        bag = rosbag.Bag('/home/'+name+'.bag')
         #choose topic
-        for topic, msg, t in bag.read_messages("/marschla/lane_filter_node/lane_pose"):
+        for topic, msg, t in bag.read_messages("/marschla2/lane_filter_node/lane_pose"):
             #rospy.loginfo(msg)
             file.write(str(msg))
 
@@ -34,12 +36,12 @@ class MyNode(DTROS):
 
 
         #choose name of txt file (choose folder according to volume mounting)
-        file = open("/home/wd1.txt","w")
+        file = open("/home/"+name+"_wd.txt","w")
 
         #name bag to analyze (attention volume mounting)
-        bag = rosbag.Bag('/home/lf2.bag')
+        bag = rosbag.Bag('/home/'+name+'.bag')
         #choose topic
-        for topic, msg, t in bag.read_messages("/marschla/wheels_driver_node/wheels_cmd"):
+        for topic, msg, t in bag.read_messages("/marschla2/wheels_driver_node/wheels_cmd"):
             #rospy.loginfo(msg)
             file.write(str(msg))
 
