@@ -20,7 +20,7 @@ class MyNode(DTROS):
     def run(self):
 
         #name of bagfile/txtfile
-        name = "PI_sat_4"
+        name = "PID_debug"
 
         #choose name of txt file (choose folder according to volume mounting)
         file = open("/home/"+name+"_lp.txt","w")

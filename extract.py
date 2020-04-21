@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #name of txt file
-name = "PI_sat_4"
+name = "PID_debug"
 
 
 #basic filter (if this even counts as filter)
@@ -37,7 +37,7 @@ def reltime(arr):
 #arrays where data is stored for plot
 dist = []
 phi = []
-lane = []
+in_lane = []
 time_pose = []
 v_l = []
 v_r = []
@@ -54,8 +54,6 @@ with open('/home/marco/bagfiles/'+name+'_lp.txt', 'r') as reader:
         #extracting d
         if line[0]+line[1]=="d:":
             dist.append(float(line[2:]))
-            #print(float(line[2:]), end='')
-            #print("\n")
 
         #extracting phi
         if line[0]+line[1]+line[2]+line[3] == "phi:":
@@ -64,10 +62,10 @@ with open('/home/marco/bagfiles/'+name+'_lp.txt', 'r') as reader:
         #extracting in_lane
         if line[0]+line[1] == "in":
             if line[9]=="T":
-                lane.append(1)
+                in_lane.append(1)
                 #print(line[9])
             else:
-                lane.append(0)
+                in_lane.append(0)
                 #print(line[9])
 
         if line[4]+line[5]+line[6] == "sec":
@@ -89,7 +87,7 @@ with open('/home/marco/bagfiles/'+name+'_wd.txt','r') as reader:
             #becaue after v_r there is a "header" too, this part figures out the length of the number
             j=0
             for i in nline[11:]:
-                if i!="0" and i!="1" and i!="2" and i!="3" and i!="4" and i!="5" and i!="6" and i!="7" and i!="8" and i!="9" and i!=".":
+                if i!="0" and i!="1" and i!="2" and i!="3" and i!="4" and i!="5" and i!="6" and i!="7" and i!="8" and i!="9" and i!="." and i!="-":
                     break
                 j+=1
             #print(nline[11:11+j])
@@ -168,5 +166,6 @@ np.savetxt("/home/marco/data_eval/"+name+"_phi.txt",phi)
 np.savetxt("/home/marco/data_eval/"+name+"_vdif.txt",vdif)
 np.savetxt("/home/marco/data_eval/"+name+"_timepose.txt",time_pose)
 np.savetxt("/home/marco/data_eval/"+name+"_timevel.txt",time_vel)
+np.savetxt("/home/marco/data_eval/"+name+"_in_lane.txt",in_lane)
 
 print("\nData stored.")
