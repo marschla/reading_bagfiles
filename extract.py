@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 #name of txt file
-name = "PID_debug"
+name = "PID1_4"
 
 
 #basic filter (if this even counts as filter)
@@ -76,6 +76,7 @@ with open('/home/marco/bagfiles/'+name+'_lp.txt', 'r') as reader:
         #next line
         line = reader.readline()
 
+'''
 with open('/home/marco/bagfiles/'+name+'_wd.txt','r') as reader:
     line = reader.readline()
     while line != "":
@@ -103,19 +104,19 @@ with open('/home/marco/bagfiles/'+name+'_wd.txt','r') as reader:
 v_r.pop(len(v_r)-1)
 v_l.pop(len(v_l)-1)
 time_vel.pop(len(time_vel)-1)
-
+'''
 #comment if data should not be filtered
 #distf = filter(dist)
 
 #time = reltime(time)
   
 print("\nData extracted")
-
+'''
 #computing velocity difference, since this our main control input
 vdif = np.arange(0,len(v_l),dtype = float)
 for i in range(0,len(v_l)):
     vdif[i]=v_r[i]-v_l[i]
-
+'''
 
 '''
 #plots
@@ -163,9 +164,9 @@ file.close()
 #using numpy to store an array of floats seems to be more convenient
 np.savetxt("/home/marco/data_eval/"+name+"_dist.txt",dist)
 np.savetxt("/home/marco/data_eval/"+name+"_phi.txt",phi)
-np.savetxt("/home/marco/data_eval/"+name+"_vdif.txt",vdif)
+#np.savetxt("/home/marco/data_eval/"+name+"_vdif.txt",vdif)
 np.savetxt("/home/marco/data_eval/"+name+"_timepose.txt",time_pose)
-np.savetxt("/home/marco/data_eval/"+name+"_timevel.txt",time_vel)
+#np.savetxt("/home/marco/data_eval/"+name+"_timevel.txt",time_vel)
 np.savetxt("/home/marco/data_eval/"+name+"_in_lane.txt",in_lane)
 
 print("\nData stored.")
