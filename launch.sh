@@ -6,4 +6,5 @@ set -e
 # ----------------------------------------------------------------------------
 roscore &
 sleep 5
-rosrun my_package readbagfile.py
+#rosrun my_package readbagfile.py
+rosrun my_package bag2yaml.py
